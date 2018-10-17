@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>'use strict';
+  document.addEventListener( "DOMContentLoaded", function(){
+    new Vue ({
+      el: '#app',
+      name: 'vue-instace',
+
+      data () {
+        return {
+          itemName: '',
+
+          shoppingItems: [
+            'bananas',
+            'milk',
+            'bread',
+            'butter',
+          ],
+        };
+      },
+
+      mounted() {} ,
+
+      methods: {
+        removeItem(index) {
+          this.shoppingItems.splice(index,1);
+        },
+
+        addItem () {
+          if (this.itemName === '') {
+            return;
+          }
+
+          this.shoppingItems.push(this.itemName);
+          this.itemName ='';
+        },
+      },
+    });
+  }) </script>
+<meta charset='utf-8'>
+</meta>
+</head>
+<div id="app" class="container">
+  <h1>Shopping list</h1>
+
+  <div class="form__item">
+    <input type="text" v-model="itemName" class="form__field" placeholder="Add an item" />
+    <button class="button" v-on:click="addItem">Add item</button>
+  </div>
+
+  <ul class="list" v-if="shoppingItems.length">
+    <li class="list__item"
+        v-for="(product, index) in shoppingItems">
+      {{ product }}
+        <button class="button" v-on:click="removeItem(index)">Remove</button>
+      </li>
+    </ul>
+
+</div>
+</html>
